@@ -5,6 +5,7 @@ import de.bcxp.challenge.weather.WeatherCSVReader;
 import de.bcxp.challenge.weather.WeatherDataObject;
 import de.bcxp.challenge.weather.WeatherUtil;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -18,17 +19,27 @@ public final class App {
      * @param args The CLI arguments passed
      */
     public static void main(String... args) {
-
-        // Your preparation code …
-        String weatherDataPath = "de/bcxp/challenge/weather.csv";
+        // Weather program
+        String weatherDataPath = "/de/bcxp/challenge/weather.csv";
         IFileReader<WeatherDataObject> fileReader = new WeatherCSVReader();
-        List<WeatherDataObject> weatherDataObjectList = fileReader.readFile(weatherDataPath);
+        try{
+            // try to extrude a list of data objects from the csv
+            List<WeatherDataObject> weatherDataObjectList = fileReader.readFile(weatherDataPath);
+            WeatherDataObject weatherDoMinTempSpread = WeatherUtil.getMinimumTemparatureSpread(weatherDataObjectList);
 
-        WeatherDataObject weatherDOminTempSpread = WeatherUtil.getMinimumTemparatureSpread(weatherDataObjectList);
+            // Print out information of this day
+            System.out.println("Day with minimal temperature span: " + weatherDoMinTempSpread.getDay());
+            System.out.println("Min temperature on this day: " + weatherDoMinTempSpread.getMinTemp());
+            System.out.println("Max temperature on this day: " + weatherDoMinTempSpread.getMaxTemp());
+        }catch(IOException e){
+            System.out.println("Error while reading the provided file:");
+            e.printStackTrace();
+        }catch(Exception e){
+            System.out.println("An error occured while processing the function");
+            e.printStackTrace();
+        }
 
-        System.out.println("Day with minimal temperature span: " + weatherDOminTempSpread.getDay());
-        System.out.println("Min temperature on this day: " + weatherDOminTempSpread.getMinTemp());
-        System.out.println("Max temperature on this day: " + weatherDOminTempSpread.getMaxTemp());
+
 
         // String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
         // System.out.printf("Day with smallest temperature spread: %s%n", dayWithSmallestTempSpread);

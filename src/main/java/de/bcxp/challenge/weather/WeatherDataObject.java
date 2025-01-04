@@ -2,9 +2,11 @@ package de.bcxp.challenge.weather;
 
 import de.bcxp.challenge.general.DataObject;
 
+/**
+ * Bean to store weather data
+ * Contains all relevant attributes
+ */
 public class WeatherDataObject extends DataObject {
-    // contains all the relevant information about a weather data object
-    // in order to complete the challenge
     int day;
     int maxTemp;
     int minTemp;
