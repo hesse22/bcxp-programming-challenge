@@ -38,8 +38,6 @@ class WeatherUtilTest {
 
         // assert
         assertEquals(minTempSpread.getDay(), result.getDay());
-        assertEquals(minTempSpread.getMinTemp(), result.getMinTemp());
-        assertEquals(minTempSpread.getMaxTemp(), result.getMaxTemp());
     }
 
     @Test

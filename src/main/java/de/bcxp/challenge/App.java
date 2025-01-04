@@ -1,5 +1,8 @@
 package de.bcxp.challenge;
 
+import de.bcxp.challenge.countries.CountryCSVParser;
+import de.bcxp.challenge.countries.CountryDataObject;
+import de.bcxp.challenge.countries.CountryUtil;
 import de.bcxp.challenge.general.IFileReader;
 import de.bcxp.challenge.general.CSVReader;
 import de.bcxp.challenge.weather.WeatherCSVParser;
@@ -21,6 +24,7 @@ public final class App {
      */
     public static void main(String... args) {
         // Weather program
+        System.out.println("### Weather Challenge ###");
         String weatherDataPath = "/de/bcxp/challenge/weather.csv";
         IFileReader<WeatherDataObject> fileReader = new CSVReader<>(new WeatherCSVParser());
         try{
@@ -29,9 +33,10 @@ public final class App {
             WeatherDataObject weatherDoMinTempSpread = WeatherUtil.getMinimumTemparatureSpread(weatherDataObjectList);
 
             // Print out information of this day
-            System.out.println("Day with minimal temperature span: " + weatherDoMinTempSpread.getDay());
+            System.out.println("Day with minimum temperature span: " + weatherDoMinTempSpread.getDay());
             System.out.println("Min temperature on this day: " + weatherDoMinTempSpread.getMinTemp());
             System.out.println("Max temperature on this day: " + weatherDoMinTempSpread.getMaxTemp());
+            System.out.println("Temperature span: " + weatherDoMinTempSpread.getTempSpan());
         }catch(IOException e){
             System.out.println("Error while reading the provided file:");
             e.printStackTrace();
@@ -40,6 +45,25 @@ public final class App {
             e.printStackTrace();
         }
 
+        // Country program
+        System.out.println("\n### Country Challenge ###");
+        String countryDataPath = "/de/bcxp/challenge/countries.csv";
+        IFileReader<CountryDataObject> countryFileReader = new CSVReader<>(new CountryCSVParser());
+        try{
+            // try to extrude a list of data objects from the csv
+            List<CountryDataObject> countryDataObjectList = countryFileReader.readFile(countryDataPath);
+            CountryDataObject countryDOmaxDensity = CountryUtil.getMaximumPopulationDensity(countryDataObjectList);
+
+            // Print out information of this day
+            System.out.println("Country with maximum population density: " + countryDOmaxDensity.getName());
+            System.out.println("Population density: " + countryDOmaxDensity.getPopulationDensity());
+        }catch(IOException e){
+            System.out.println("Error while reading the provided file:");
+            e.printStackTrace();
+        }catch(Exception e){
+            System.out.println("An error occured while processing the function");
+            e.printStackTrace();
+        }
 
 
         // String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …

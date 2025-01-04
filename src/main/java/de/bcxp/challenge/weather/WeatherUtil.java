@@ -17,6 +17,7 @@ public class WeatherUtil {
             throw new Exception("List cannot be empty");
         }
 
+        // iterate over the list in order to find the minimum value
         WeatherDataObject weatherDOminTempSpread = weatherDataObjectList.get(0);
         for(WeatherDataObject currentDataObject : weatherDataObjectList){
             if (currentDataObject.getTempSpan() < weatherDOminTempSpread.getTempSpan()){

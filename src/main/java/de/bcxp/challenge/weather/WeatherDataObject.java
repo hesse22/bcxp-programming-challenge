@@ -4,7 +4,7 @@ import de.bcxp.challenge.general.DataObject;
 
 /**
  * Bean to store weather data
- * Contains all relevant attributes
+ * Reduced to the attributes relevant to solve the task
  */
 public class WeatherDataObject extends DataObject {
     int day;

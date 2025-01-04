@@ -1,8 +1,5 @@
 package de.bcxp.challenge.general;
 
-import de.bcxp.challenge.general.DataObject;
-import de.bcxp.challenge.general.ICSVParser;
-import de.bcxp.challenge.general.IFileReader;
 import de.bcxp.challenge.weather.WeatherDataObject;
 
 import java.io.BufferedReader;
@@ -27,6 +24,7 @@ public class CSVReader<T extends DataObject> implements IFileReader<T> {
      * @return List of Weather Data Objects
      * @throws IOException
      */
+    @Override
     public List<T> readFile(String filePath) throws IOException{
        // initialize list
        List<T> dataObjects = new ArrayList<>();
@@ -43,8 +41,8 @@ public class CSVReader<T extends DataObject> implements IFileReader<T> {
                T parsedObject = parser.parseLine(line);
                dataObjects.add(parsedObject);
                currentLine++;
-           }catch(IOException e){
-               throw new IOException("Error in line " + currentLine + " of the provided csv-File");
+           }catch(Exception e){
+               throw new IOException("Error in line " + currentLine + " of the provided csv-File. " + e.getMessage());
            }
         }
 

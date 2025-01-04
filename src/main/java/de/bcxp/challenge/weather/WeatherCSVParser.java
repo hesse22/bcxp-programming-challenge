@@ -4,7 +4,16 @@ import de.bcxp.challenge.general.ICSVParser;
 
 import java.io.IOException;
 
+/**
+ * Class to parse a line from a csv-dataset of weather data
+ */
 public class WeatherCSVParser implements ICSVParser<WeatherDataObject> {
+    /**
+     * @param line line to extract information from
+     * @return {@link WeatherDataObject} containing the given information
+     * @throws IOException
+     */
+    @Override
     public WeatherDataObject parseLine(String line) throws IOException{
         WeatherDataObject weatherDataObject = new WeatherDataObject();
         String[] objectData = line.split(",");
