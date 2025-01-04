@@ -1,7 +1,8 @@
 package de.bcxp.challenge;
 
 import de.bcxp.challenge.general.IFileReader;
-import de.bcxp.challenge.weather.WeatherCSVReader;
+import de.bcxp.challenge.general.CSVReader;
+import de.bcxp.challenge.weather.WeatherCSVParser;
 import de.bcxp.challenge.weather.WeatherDataObject;
 import de.bcxp.challenge.weather.WeatherUtil;
 
@@ -21,7 +22,7 @@ public final class App {
     public static void main(String... args) {
         // Weather program
         String weatherDataPath = "/de/bcxp/challenge/weather.csv";
-        IFileReader<WeatherDataObject> fileReader = new WeatherCSVReader();
+        IFileReader<WeatherDataObject> fileReader = new CSVReader<>(new WeatherCSVParser());
         try{
             // try to extrude a list of data objects from the csv
             List<WeatherDataObject> weatherDataObjectList = fileReader.readFile(weatherDataPath);
